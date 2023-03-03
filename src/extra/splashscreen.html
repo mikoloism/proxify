@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" style="width: 100vw; height: 100vh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div
-      style="
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-items: center;
-      "
-    >
-      <img src="./dist/logo.png" style="height: 12rem; margin: auto" />
-    </div>
-  </body>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+			integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer" />
+		<title>Loading...</title>
+	</head>
+	<body class="bg-blue-200 text-blue-800">
+		<div class="flex justify-center items-center h-screen">
+			<div
+				class="relative w-24 h-24 animate-spin rounded-full bg-gradient-to-r from-purple-400 via-blue-500 to-red-400">
+				<div
+					class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-blue-200 rounded-full border-2 border-blue-200"></div>
+			</div>
+		</div>
+	</body>
 </html>
