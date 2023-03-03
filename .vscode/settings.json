@@ -22,5 +22,5 @@
 		"**/README.md": true
 	},
 	"explorerExclude.backup": {},
-	"cSpell.words": ["proxify"]
+	"cSpell.words": ["proxify", "splashscreen"]
 }

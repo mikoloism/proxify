@@ -38,7 +38,7 @@ function createMainWindow() {
 
 	// create a new `splash`-Window
 	const splash = createWindow('splash', { show: true });
-	splash.loadURL(`file://${__dirname}/../../splashscreen.html`);
+	splash.loadURL(`file://${__dirname}/../extra/splashscreen.html`);
 
 	const port = process.env.PORT || 3333;
 	if (isDev) {

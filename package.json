@@ -57,7 +57,7 @@
 			"src/main/index.js",
 			"src/main",
 			"src/renderer",
-			"splashscreen.html",
+			"src/extra/splashscreen.html",
 			"dist",
 			"tailwind.config.js",
 			"package.json"
