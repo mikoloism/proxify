@@ -13,25 +13,36 @@ try {
 contextMenu({
 	showSearchWithGoogle: false,
 	showCopyImage: false,
-	prepend: (defaultActions, params, browserWindow) => [
-		{
-			label: 'its like magic 💥',
-		},
+	prepend: (defaultActions: any, params: any, browserWindow: any) => [
+		{ label: 'its like magic 💥' },
 	],
 });
 
 const isDev = !app.isPackaged;
 
-let mainWindow;
+let mainWindow: {
+	loadURL: (arg0: string) => Promise<any>;
+	once: (arg0: string, arg1: { (): void; (): void }) => void;
+	loadFile: (arg0: string) => void;
+	show: () => void;
+	focus: () => void;
+} | null;
 
-function loadVitePage(port) {
-	mainWindow.loadURL(`http://localhost:${port}`).catch((err) => {
-		console.log('VITE NOT READY, WILL TRY AGAIN IN 200ms');
-		setTimeout(() => {
-			// do it again as the vite build can take a bit longer the first time
-			loadVitePage(port);
-		}, 200);
-	});
+function loadVitePage(port: string | number) {
+	try {
+		if (typeof mainWindow === 'object' && mainWindow == null)
+			throw new Error('[NullException] : mainWindow');
+
+		mainWindow.loadURL(`http://localhost:${port}`).catch((err: any) => {
+			console.log('VITE NOT READY, WILL TRY AGAIN IN 200ms');
+			setTimeout(() => {
+				// do it again as the vite build can take a bit longer the first time
+				loadVitePage(port);
+			}, 200);
+		});
+	} catch (error: unknown) {
+		console.error(error);
+	}
 }
 
 function createMainWindow() {
@@ -39,7 +50,7 @@ function createMainWindow() {
 		backgroundColor: fullTailwindConfig.theme.colors.primary[800],
 		show: false,
 	});
-	mainWindow.once('close', () => {
+	mainWindow?.once('close', () => {
 		mainWindow = null;
 	});
 
@@ -54,15 +65,15 @@ function createMainWindow() {
 	if (isDev) {
 		loadVitePage(port);
 	} else {
-		mainWindow.loadFile(`${__dirname}/../renderer/dist/index.html`);
+		mainWindow?.loadFile(`${__dirname}/../renderer/dist/index.html`);
 	}
 
 	// if main window is ready to show, then destroy the splash window and show up the main window
-	mainWindow.once('ready-to-show', () => {
+	mainWindow?.once('ready-to-show', () => {
 		console.log('READY');
 		splash.destroy();
-		mainWindow.show();
-		mainWindow.focus();
+		mainWindow?.show();
+		mainWindow?.focus();
 	});
 }
 

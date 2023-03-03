@@ -1,4 +1,5 @@
 {
+	"vetur.validation.template": false,
 	"search.exclude": {
 		"**/build": true,
 		"**/dist": true
@@ -13,7 +14,12 @@
 		"**/.classpath": true,
 		"**/.project": true,
 		"**/.settings": true,
-		"**/.factorypath": true
+		"**/.factorypath": true,
+		"**/node_modules": true,
+		"**/.gitignore": true,
+		"**/LICENSE": true,
+		"**/.vscode": true,
+		"**/README.md": true
 	},
 	"explorerExclude.backup": {},
 	"cSpell.words": ["proxify"]
