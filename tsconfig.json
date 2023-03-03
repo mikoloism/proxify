@@ -14,16 +14,7 @@
 			"/*": ["./*"],
 			"main/*": ["./src/main/*"],
 			"~/*": ["./src/renderer/*"]
-		},
-		"types": [
-			"@types/node",
-			"@nuxt/types",
-			"@nuxtjs/axios",
-			"nuxt-i18n",
-			"@types/lodash-es",
-			"**/*.d.ts",
-			"@types/jest"
-		]
+		}
 	},
 	"exclude": ["node_modules", "**/*.d.ts"]
 }
