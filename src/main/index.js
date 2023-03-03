@@ -31,13 +31,13 @@ function loadVitePage(port) {
 }
 
 function createMainWindow() {
-	mainWindow = createWindow('main', { show: false });
+	mainWindow = createWindow('main', { show: false, movable: true });
 	mainWindow.once('close', () => {
 		mainWindow = null;
 	});
 
 	// create a new `splash`-Window
-	const splash = createWindow('splash', { show: true });
+	const splash = createWindow('splash', { show: true, movable: false });
 	splash.loadURL(`file://${__dirname}/../extra/splashscreen.html`);
 
 	const port = process.env.PORT || 3333;

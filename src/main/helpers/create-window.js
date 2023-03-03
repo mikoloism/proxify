@@ -1,5 +1,4 @@
 const { app, screen, BrowserWindow } = require('electron');
-const windowStateKeeper = require('electron-window-state');
 
 const isProd = app.isPackaged;
 
@@ -9,10 +8,11 @@ module.exports = function createWindow(windowName = 'main', options = {}) {
 		minHeight: 600,
 		titleBarStyle: 'hidden',
 		autoHideMenuBar: true,
-		trafficLightPosition: {
-			x: 20,
-			y: 32,
-		},
+		center: true,
+		darkTheme: true,
+		resizable: false,
+		maximizable: false,
+		movable: false,
 		...options,
 		webPreferences: {
 			contextIsolation: true,
@@ -23,21 +23,13 @@ module.exports = function createWindow(windowName = 'main', options = {}) {
 		},
 	};
 
-	let windowState = windowStateKeeper({
-		defaultWidth: winOptions.minWidth,
-		defaultHeight: winOptions.minHeight,
-	});
-
 	let win;
 
 	win = new BrowserWindow({
 		...winOptions,
-		x: windowState.x,
-		y: windowState.y,
-		width: windowState.width,
-		height: windowState.height,
+		width: winOptions.minWidth,
+		height: winOptions.minHeight,
 	});
-	windowState.manage(win);
 
 	// disabled as we now do it explicitly white hiding the splash screen
 	// win.once('ready-to-show', () => {
