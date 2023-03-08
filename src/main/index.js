@@ -2,21 +2,15 @@
 
 const createWindow = require('./helpers/create-window.js');
 const { app } = require('electron');
-const contextMenu = require('electron-context-menu');
+const mainConfig = require('./configs/main.config.js');
+const splashConfig = require('./configs/splash.config.js');
+const constants = require('./constants');
 
 try {
 	require('electron-reloader')(module);
 } catch {}
 
-contextMenu({
-	showSearchWithGoogle: false,
-	showCopyImage: false,
-	prepend: (defaultActions, params, browserWindow) => [
-		{ label: 'its like magic 💥' },
-	],
-});
-
-const isDev = !app.isPackaged;
+const isDev = true;
 
 let mainWindow;
 
@@ -31,16 +25,16 @@ function loadVitePage(port) {
 }
 
 function createMainWindow() {
-	mainWindow = createWindow('main', { show: false, movable: true });
+	mainWindow = createWindow(mainConfig.appName, mainConfig.options);
 	mainWindow.once('close', () => {
 		mainWindow = null;
 	});
 
 	// create a new `splash`-Window
-	const splash = createWindow('splash', { show: true, movable: false });
-	splash.loadURL(`file://${__dirname}/../extra/splashscreen.html`);
+	const splash = createWindow(splashConfig.appName, splashConfig.options);
+	splash.loadURL(constants.SPLASH_LOAD_URL);
 
-	const port = process.env.PORT || 3333;
+	const port = process.env.PORT || constants.DEFAULT_MAIN_PORT;
 	if (isDev) {
 		loadVitePage(port);
 	} else {
@@ -53,6 +47,7 @@ function createMainWindow() {
 		splash.destroy();
 		mainWindow.show();
 		mainWindow.focus();
+		mainWindow.webContents.openDevTools();
 	});
 }
 

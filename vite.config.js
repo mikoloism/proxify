@@ -2,21 +2,16 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 const srcPath = path.resolve(__dirname, 'src', 'renderer');
+const constPath = path.resolve(__dirname, 'src', 'main', 'constants');
+const constants = require(constPath);
 
 module.exports = {
 	server: {
 		open: false, // do not open the browser as we use electron
-		port: process.env.PORT || 3333,
+		port: process.env.PORT || constants.DEFAULT_MAIN_PORT,
 	},
 	root: './src/renderer',
-	resolve: {
-		alias: [
-			{
-				find: '~',
-				replacement: srcPath,
-			},
-		],
-	},
+	resolve: { alias: [{ find: '~', replacement: srcPath }] },
 	plugins: [vue()],
 	optimizeDeps: {
 		// exclude path and electron-window-state as we are using the node runtime inside the browser
